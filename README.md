@@ -61,7 +61,7 @@ You should also include the speed you used (33 or 45) as well, since the `min_di
 
 <br/>
 <div align="center" style="padding: 20px 0;">
-    <img src="audacity.png" alt="Audacity screenshot showing captured WAV file">
+    <img src="images/audacity.png" alt="Audacity screenshot showing captured WAV file">
     <p><b>Audacity showing captured normalized, stereo WAV file. Clicks are clearly visible.</b></p>
 </div>
 <br/>

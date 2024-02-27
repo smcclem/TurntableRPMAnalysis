@@ -1,3 +1,4 @@
+import argparse
 import librosa
 import numpy as np
 from scipy.signal import find_peaks
@@ -28,9 +29,11 @@ def find_highest_peaks(audio_mono, sr, num_peaks, min_distance_samples):
     return peak_times, peak_heights
 
 def calculate_intervals(peak_times):
+    """Calculate time intervals between peaks."""
     return np.diff(peak_times)
 
 def calculate_intervals_stats(intervals):
+    """Calculate statistics for time intervals and convert them to RPM values."""
     if intervals.size == 0:
         return None
     rpm_values = 60 / intervals
@@ -42,8 +45,8 @@ def calculate_intervals_stats(intervals):
     }
     return stats
 
-def print_stats(stats):
-    # Determine the maximum number of decimal places needed
+def print_stats(stats, channel_mode, num_peaks):
+    """Print statistics for the analysis."""
     max_decimal_places = max(max(len(str(value).split('.')[1]) if '.' in str(value) else 0 for value in pair) for pair in stats.values())
     
     print()
@@ -54,33 +57,36 @@ def print_stats(stats):
     print("-" * 90)
     
     for stat, (interval, rpm) in stats.items():
-        # Format the numbers with a uniform number of decimal places, avoiding scientific notation
         interval_str = f"{interval:.{max_decimal_places}f}"
         rpm_str = f"{rpm:.{max_decimal_places}f}"
-        
         print(f"{stat:<20} {interval_str:<35} {rpm_str:<35}")
 
+def parse_arguments():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(description="Turntable RPM Analysis")
+    parser.add_argument("filename", type=str, help="Path to the audio file")
+    parser.add_argument("num_peaks", type=int, help="Number of highest peaks to find")
+    parser.add_argument("min_distance_ms", type=int, help="Minimum distance between peaks in milliseconds")
+    parser.add_argument("--channel_mode", type=str, choices=['left', 'right', 'mix'], default='mix', help="Channel mode for analysis ('left', 'right', 'mix')")
+    return parser.parse_args()
 
-
-def main(filename, num_peaks, min_distance_ms, channel_mode='mix'):
-    audio, sr = librosa.load(filename, sr=None, mono=False)  # Load the audio file
-    audio_mono = mix_down_to_mono(audio, channel_mode)  # Process audio based on channel mode
-    min_distance_samples = int((min_distance_ms / 1000.0) * sr)
-    peak_times, peak_heights = find_highest_peaks(audio_mono, sr, num_peaks, min_distance_samples)
-    if len(peak_times) == num_peaks:
+def main():
+    args = parse_arguments()
+    
+    audio, sr = librosa.load(args.filename, sr=None, mono=False)  # Load the audio file
+    audio_mono = mix_down_to_mono(audio, args.channel_mode)  # Process audio based on channel mode
+    min_distance_samples = int((args.min_distance_ms / 1000.0) * sr)
+    peak_times, peak_heights = find_highest_peaks(audio_mono, sr, args.num_peaks, min_distance_samples)
+    
+    if len(peak_times) == args.num_peaks:
         intervals = calculate_intervals(peak_times)
         stats = calculate_intervals_stats(intervals)
         if stats:
-            print_stats(stats)
+            print_stats(stats, args.channel_mode, args.num_peaks)
         else:
             print("Could not calculate statistics.")
     else:
-        print(f"Expected {num_peaks} peaks, but found {len(peak_times)}. Unable to calculate statistics.")
+        print(f"Expected {args.num_peaks} peaks, but found {len(peak_times)}. Unable to calculate statistics.")
 
-# Example usage
-filename = '/update/this/path/to/yourwave.wav'  # Update this path to your audio file
-num_peaks = 45  # Specify the number of highest peaks you want to find
-min_distance_ms = 1300  # Minimum distance between peaks in milliseconds, adjust based on your needs (33 RPM = 1700, 45 RPM = 1300)
-# Favor left channel. 
-channel_mode = 'left'  # 'left', 'right', or 'mix' - choose which channel to analyze
-main(filename, num_peaks, min_distance_ms, channel_mode)
+if __name__ == "__main__":
+    main()

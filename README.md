@@ -41,7 +41,7 @@ python3 rpm.py
 A dead-end groove on an LP normally contains a prominent "click" or "pop" where the groove enters the dead-end groove. A well defined click is heard each rotation as the stylus passes over the entry groove. This script precisely measures the time between each click to
 derive the precise RPM that the turntable platter is rotating at. A sound card must be used to capture a WAV file for the rpm.py script to post-process. It does not currently have real time analysis. No special LP is needed for this test, as all LPs contain
 at least one dead-end groove at the end of a side. Some turntables auto-stop at the end of the LP side not allowing for these clicks to be recorded. In that case, an LP with a dead-end groove prior to the LP run out groove must be used. An example of that
-would be the CBS STR-100 test record, where some tracks (bands) end with a dead-end groove to prevent the stylus from advancing to the next test track.  This script was tested specifically using the CBS STR-100 (issue 3) test LP.  After testing several
+would be the CBS STR-100 test record, where some tracks (bands) end with a dead-end groove to prevent the stylus from advancing to the next test track.  This script was tested specifically using the <b>CBS STR-100 </b> (issue 3) test LP.  After testing several
 LP dead-end grooves, it was determined that the CBS STR-100 produced clean clicks that were more easily detected.  Not all dead-end grooves produce a sufficiently defined click that rises well above the surface noise of the LP.  This is why two parameters of
 the script include the number of expected clicks (num_peaks) and a minimum expected distance between those clicks (min_distance).  This is to give the script enough of a hint to easily identify the target clicks.  If it cannot, then it will display a message.
 It is also possible that some stylus profiles (ex. conical, elliptical),  phono preamps with limited headroom and/or certain LPs might not produce a well defined click peak that can be accurately analyzed. Another advantage of using the CBS STR-100 LP is that
@@ -58,6 +58,13 @@ it means that your equipment or test LP isn't providing a clean enough peak for 
 While not required, we recommend normalizing the WAV file to 0 dB and removing DC offset, using software such as Audacity. Normalizing in Audacity has the benefit in that you can clearly visualize the clicks and the noise floor within Audacity to make sure you have captured
 something usable. We recommend saving the file with a name which indicates the number of clicks included, so that you do not have to remember or count them when you run the script, remembering that you must specify the `num_peaks` value in the script.
 You should also include the speed you used (33 or 45) as well, since the `min_distance` must be specified according to the usage.
+
+<br/>
+<div align="center" style="padding: 20px 0;">
+    <img src="audacity.png" alt="Audacity screenshot showing captured WAV file">
+    <p><b>Audacity showing captured normalized, stereo WAV file. Clicks are clearly visible.</b></p>
+</div>
+<br/>
 
 The longer your recorded sample, the more accuracy you will have regarding average speed over time, as well as variance. For the most part, 1 minute of sampling should be enough and is a good sample for comparison. (1 minute of sampling,  33 1/3 RPM  = ~ 35 clicks & 45 RPM = ~ 45 clicks)
 

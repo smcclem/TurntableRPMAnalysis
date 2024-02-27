@@ -26,15 +26,19 @@ pip install librosa numpy scipy
 ## Usage
 1. Directly record the output of your turntable with the stylus looping in a a dead-end groove (i.e. the end of the LP side) in stereo with a sound card (line input).
 2. Save the audio file in a format supported by Librosa (e.g., WAV).
-3. Update the `filename` variable in the script with the path to your audio file.
-4. Update the `num_peaks` variable to indicated the number of clicks recorded in your audio file.
-5. Update the `min_distance` variable to indicate mininum time in milliseconds expected between clicks (i.e. 1700 for 33 1/3 RPM,  1200 for 45 RPM)
-6. Update the `channel_mode` mode variable if required. This defaults to 'left', which uses the left channel.  If the left channel cannot be analyzed, try the 'right', followed by 'mix'.
-7. Run the script:
+3. Run the script from the command line, providing the path to your audio file, the number of clicks (peaks) included in your audio file, the minimum expected distance between clicks in milliseconds, and optionally the channel mode (`left`, `right`, or `mix`). Here's how you can do it:
 
 ```bash
-python3 rpm.py
+python3 rpm.py <path_to_your_audio_file.wav> <number_of_peaks> <minimum_distance_in_ms> [--channel_mode <channel_mode>]
 ```
+
+Example Command:
+
+```bash
+python3 rpm.py /path/to/your/audio.wav 45 1300 --channel_mode left
+```
+
+
 
 ## How It Works
 
@@ -76,17 +80,17 @@ up as a variance at a specific azimuth that is far different than the others. An
 Output will be directed to standard out.  Here is an example:
 
 ```
-python3 rpm.py
+python3 rpm.py ~/c45rpm45.wav 45 1300 --channel_mode left
 
 Channel mode: left
 Revolutions: 44
 
 Statistic            Time Intervals (s)                  RPM Values
 ------------------------------------------------------------------------------------------
-Min                  1.3332031250000042633               44.9982422561619088697
-Max                  1.3333854166666654351               45.0043949604452109270
-Average              1.3332941524621211293               45.0013224919138608016
-Std Dev              0.0000624258619264826               0.0021069934632214045
+Min                  1.333208333333331552                44.998418024366408474
+Max                  1.333380208333331041                45.004219145544958280
+Average              1.333293678977272911                45.001338466409144701
+Std Dev              0.000060313472201144                0.002035699504200471
 ```
  
 

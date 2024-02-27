@@ -47,9 +47,9 @@ derive the precise RPM that the turntable platter is rotating at. A sound card m
 at least one dead-end groove at the end of a side. Some turntables auto-stop at the end of the LP side not allowing for these clicks to be recorded. In that case, an LP with a dead-end groove prior to the LP run out groove must be used. An example of that
 would be the CBS STR-100 test record, where some tracks (bands) end with a dead-end groove to prevent the stylus from advancing to the next test track.  This script was tested specifically using the <b>CBS STR-100 </b> (issue 3) test LP, Band 3B.  After testing several
 LP dead-end grooves, it was determined that the CBS STR-100 produced clean clicks that were more easily detected.  Not all dead-end grooves produce a sufficiently defined click that rises well above the surface noise of the LP.  This is why two parameters of
-the script include the number of expected clicks (num_peaks) and a minimum expected distance between those clicks (min_distance).  This is to give the script enough of a hint to easily identify the target clicks.  If it cannot, then it will display a message.
+the script include the number of expected clicks and a minimum expected distance between those clicks.  This is to give the script enough of a hint to easily identify the target clicks.  If it cannot, then it will display a message.
 It is also possible that some stylus profiles (ex. conical, elliptical),  phono preamps with limited headroom and/or certain LPs might not produce a well defined click peak that can be accurately analyzed. Another advantage of using the CBS STR-100 LP is that
-the dead-end groove chosen can normally be closer to the null point of the stylus, depending on your particular cartridge alignment. This results in a click with less distortion components.  
+the dead-end groove chosen can normally be closer to the null point of the stylus, depending on your particular cartridge alignment. This can in a click with less distortion components, which can improve the captured click waveform.  
 
 You can use any bitrate and sampling rate.  You must record in 2 channel stereo mode.  The script currently expects stereo, because it provides more flexibility for analysis. Using a higher sampling rate increases the precision of the calculations.
 For instance a sample rate of 48Khz results in a resolution of 0.0000052083 seconds per sample.  192Khz is 0.000001302075 seconds per sample. This results in a very precise timing of RPM, far beyond any other commonly available method. You must make
@@ -60,8 +60,8 @@ that doesn't work, 'mix' can be used. Mix mixes the two channels into mono (in p
 it means that your equipment or test LP isn't providing a clean enough peak for the script to detect precise timing.
 
 While not required, we recommend normalizing the WAV file to 0 dB and removing DC offset, using software such as Audacity. Normalizing in Audacity has the benefit in that you can clearly visualize the clicks and the noise floor within Audacity to make sure you have captured
-something usable. We recommend saving the file with a name which indicates the number of clicks included, so that you do not have to remember or count them when you run the script, remembering that you must specify the `num_peaks` value in the script.
-You should also include the speed you used (33 or 45) as well, since the `min_distance` must be specified according to the usage.
+something usable. We recommend saving the file with a name which indicates the number of clicks included, so that you do not have to remember or count them when you run the script, remembering that you must specify the number of peaks value to the script as an argument.
+You should also include the speed you used (33 or 45) as well, since the minimum expected distance must be specified according to the usage.
 
 <br/>
 <div align="center" style="padding: 20px 0;">

@@ -106,7 +106,7 @@ We've established a dedicated thread on [Audio Science Review](https://www.audio
 - **Get Help and Advice**: Encounter an issue? Looking for tips? The community and the developers are here to help.
 - **Provide Feedback**: Your suggestions can help improve the script for everyone. Don't hesitate to share your thoughts.
 
-**Direct Link to the Discussion Thread**: Dive into the conversation through this permalink: [Turntable RPM Analysis Discussion Thread](https://www.audiosciencereview.com/)
+**Direct Link to the Discussion Thread**: Dive into the conversation through this permalink: [Turntable RPM Analysis Discussion Thread](https://www.audiosciencereview.com/forum/index.php?threads/turntable-rpm-measurement-script.52586/)
 
 Your participation helps make our tool better for everyone. We look forward to seeing your contributions and discussions!
 

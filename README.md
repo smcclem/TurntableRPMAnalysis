@@ -42,10 +42,10 @@ python3 rpm.py /path/to/your/audio.wav 45 1300 --channel_mode left
 
 ## How It Works
 
-A dead-end groove on an LP normally contains a prominent "click" or "pop" where the groove enters the dead-end groove. A well defined click is heard each rotation as the stylus passes over the entry groove. This script precisely measures the time between each click to
+A dead-end groove on an LP normally contains a well defined 'click' or 'pop' as the stylus passes by the entry groove. This script precisely measures the time between each click to
 derive the precise RPM that the turntable platter is rotating at. A sound card must be used to capture a WAV file for the rpm.py script to post-process. It does not currently have real time analysis. No special LP is needed for this test, as all LPs contain
 at least one dead-end groove at the end of a side. Some turntables auto-stop at the end of the LP side not allowing for these clicks to be recorded. In that case, an LP with a dead-end groove prior to the LP run out groove must be used. An example of that
-would be the CBS STR-100 test record, where some tracks (bands) end with a dead-end groove to prevent the stylus from advancing to the next test track.  This script was tested specifically using the <b>CBS STR-100 </b> (issue 3) test LP.  After testing several
+would be the CBS STR-100 test record, where some tracks (bands) end with a dead-end groove to prevent the stylus from advancing to the next test track.  This script was tested specifically using the <b>CBS STR-100 </b> (issue 3) test LP, Band 3B.  After testing several
 LP dead-end grooves, it was determined that the CBS STR-100 produced clean clicks that were more easily detected.  Not all dead-end grooves produce a sufficiently defined click that rises well above the surface noise of the LP.  This is why two parameters of
 the script include the number of expected clicks (num_peaks) and a minimum expected distance between those clicks (min_distance).  This is to give the script enough of a hint to easily identify the target clicks.  If it cannot, then it will display a message.
 It is also possible that some stylus profiles (ex. conical, elliptical),  phono preamps with limited headroom and/or certain LPs might not produce a well defined click peak that can be accurately analyzed. Another advantage of using the CBS STR-100 LP is that
@@ -93,7 +93,22 @@ Average              1.333293678977272911                45.001338466409144701
 Std Dev              0.000060313472201144                0.002035699504200471
 ```
  
+## Community and Support
 
+Join a vibrant community to discuss the Turntable RPM Analysis script, share your results, ask questions, and connect with fellow audiophiles and hobbyists. Whether you're looking to troubleshoot an issue, share insights, or simply learn more about turntable performance analysis, the Audio Science Review forum is the place to be.
+
+### Join the Discussion
+
+We've established a dedicated thread on [Audio Science Review](https://www.audiosciencereview.com/) for all things related to the Turntable RPM Analysis script. This is a fantastic opportunity to engage with a community of like-minded individuals passionate about audio equipment and analysis.
+
+**What to Expect in the Forum:**
+- **Share Your Results**: Post your RPM analysis findings and see how they compare with others'.
+- **Get Help and Advice**: Encounter an issue? Looking for tips? The community and the developers are here to help.
+- **Provide Feedback**: Your suggestions can help improve the script for everyone. Don't hesitate to share your thoughts.
+
+**Direct Link to the Discussion Thread**: Dive into the conversation through this permalink: [Turntable RPM Analysis Discussion Thread](https://www.audiosciencereview.com/)
+
+Your participation helps make our tool better for everyone. We look forward to seeing your contributions and discussions!
 
 
 ## Contributing

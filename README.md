@@ -74,7 +74,7 @@ The longer your recorded sample, the more accuracy you will have regarding avera
 
 The script calculates the minimum, maximum, average and standard deviation of each rotation in seconds, as well as in RPM. Because this calculation is made at
 the same azimuth point each revolution, it cannot calculate flutter, which would rely on a continuous measurement of turntable speed. Rather these measurements are a precise averaging of speed over 1 revolution which would give an idea of wow. Ultimately, it should still
-serve as a precise way to set turntable speed. It might be possible to take measurements by changing the record's azimuth orientation on the the platter and making a collection of measurements at a variation of angles to expose any minute flutter issues, which might show
+serve as a precise way to set turntable speed. It might be possible to take measurements by changing the record's azimuth orientation on the the platter and making a collection of measurements at a variation of angles to expose different rpm characteristics, which might show
 up as a variance at a specific azimuth that is far different than the others. Another advantage of this method of measuring RPM is that it includes stylus friction normally incurred while playing an LP, not encountered when using strobe discs. 
 
 Output will be directed to standard out.  Here is an example:

@@ -78,7 +78,7 @@ Output will be directed to standard out.  Here is an example:
 ```
 python3 rpm.py
 
-Channel mode: mix
+Channel mode: left
 Revolutions: 44
 
 Statistic            Time Intervals (s)                  RPM Values

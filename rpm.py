@@ -37,9 +37,10 @@ def calculate_intervals_stats(intervals):
     if intervals.size == 0:
         return None
     rpm_values = 60 / intervals
+    """Min time = Max RPM && Max time = Min RPM"""
     stats = {
-        'Min': (np.min(intervals), np.min(rpm_values)),
-        'Max': (np.max(intervals), np.max(rpm_values)),
+        'Min': (np.min(intervals), np.max(rpm_values)),
+        'Max': (np.max(intervals), np.min(rpm_values)),
         'Average': (np.mean(intervals), np.mean(rpm_values)),
         'Std Dev': (np.std(intervals), np.std(rpm_values))
     }
@@ -48,7 +49,6 @@ def calculate_intervals_stats(intervals):
 def print_stats(stats, channel_mode, num_peaks):
     """Print statistics for the analysis."""
     max_decimal_places = max(max(len(str(value).split('.')[1]) if '.' in str(value) else 0 for value in pair) for pair in stats.values())
-    
     print()
     print("Channel mode: " + channel_mode)
     print(f"Revolutions: {num_peaks - 1}")
@@ -66,7 +66,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Turntable RPM Analysis")
     parser.add_argument("filename", type=str, help="Path to the audio file")
     parser.add_argument("num_peaks", type=int, help="Number of highest peaks to find")
-    parser.add_argument("min_distance_ms", type=int, help="Minimum distance between peaks in milliseconds")
+    parser.add_argument("min_distance_ms", type=int, help="Minimum distance between peaks in milliseconds. Ex. 33 1/3 RPM: 1700, For 45 RPM: 1300")
     parser.add_argument("--channel_mode", type=str, choices=['left', 'right', 'mix'], default='mix', help="Channel mode for analysis ('left', 'right', 'mix')")
     return parser.parse_args()
 

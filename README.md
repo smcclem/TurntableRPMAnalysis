@@ -77,7 +77,9 @@ the same azimuth point each revolution, it cannot calculate flutter, which would
 serve as a precise way to set turntable speed. It might be possible to take measurements by changing the record's azimuth orientation on the the platter and making a collection of measurements at a variation of angles to expose different rpm characteristics, which might show
 up as a variance at a specific azimuth that is far different than the others. Another advantage of this method of measuring RPM is that it includes stylus friction normally incurred while playing an LP, not encountered when using strobe discs. 
 
-Output will be directed to standard out.  Here is an example:
+Output will be directed to standard out. <i>Note the when reading the output, the minimal time interval produces the maximum RPM, the the maximum interval produces the minimal RPM.</i>
+
+Here is an example:
 
 ```
 python3 rpm.py ~/c45rpm45.wav 45 1300 --channel_mode left
@@ -87,8 +89,8 @@ Revolutions: 44
 
 Statistic            Time Intervals (s)                  RPM Values
 ------------------------------------------------------------------------------------------
-Min                  1.333208333333331552                44.998418024366408474
-Max                  1.333380208333331041                45.004219145544958280
+Min                  1.333208333333331552                45.004219145544958280 
+Max                  1.333380208333331041                44.998418024366408474
 Average              1.333293678977272911                45.001338466409144701
 Std Dev              0.000060313472201144                0.002035699504200471
 ```

@@ -77,7 +77,7 @@ the same azimuth point each revolution, it cannot calculate flutter, which would
 serve as a precise way to set turntable speed. It might be possible to take measurements by changing the record's azimuth orientation on the the platter and making a collection of measurements at a variation of angles to expose different rpm characteristics, which might show
 up as a variance at a specific azimuth that is far different than the others. Another advantage of this method of measuring RPM is that it includes stylus friction normally incurred while playing an LP, not encountered when using strobe discs. 
 
-Output will be directed to standard out. <i>Note the when reading the output, the minimal time interval produces the maximum RPM, the the maximum interval produces the minimal RPM.</i>
+Output will be directed to standard out. <i>Note that when reading the output, the minimal time interval produces the maximum RPM, the the maximum interval produces the minimal RPM.</i>
 
 Here is an example:
 

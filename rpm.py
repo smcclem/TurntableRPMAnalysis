@@ -37,10 +37,9 @@ def calculate_intervals_stats(intervals):
     if intervals.size == 0:
         return None
     rpm_values = 60 / intervals
-    """Min time = Max RPM && Max time = Min RPM"""
     stats = {
-        'Min': (np.min(intervals), np.max(rpm_values)),
-        'Max': (np.max(intervals), np.min(rpm_values)),
+        'Min': (np.min(intervals), np.min(rpm_values)),
+        'Max': (np.max(intervals), np.max(rpm_values)),
         'Average': (np.mean(intervals), np.mean(rpm_values)),
         'Std Dev': (np.std(intervals), np.std(rpm_values))
     }
@@ -90,3 +89,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

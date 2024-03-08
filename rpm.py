@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 from scipy.io import wavfile
+import os
 
 def mix_down_to_mono(audio_data, channel_mode='mix'):
     """Mix down stereo audio data to mono based on the selected channel mode."""
@@ -72,29 +73,31 @@ def parse_arguments():
     parser.add_argument("--plot_title", action='store', type=str, help="Title of the plot")
     return parser.parse_args()
 
-def plot_out(intervals, title):
-
+def plot_out(intervals, title, output_file_path):
     fig, ax = plt.subplots(1, 1, figsize=(16,8))
-
-    t = np.arange(0,len(intervals))
-
+    t = np.arange(0, len(intervals))
     ax.plot(t, intervals)
-
     ax2 = ax.twinx()
     mn, mx = ax.get_ylim()
     ax2.set_ylim(60/mn, 60/mx)
-
     ax.set_ylabel("Time (s)")
     ax2.set_ylabel("RPM")
     ax.set_xlabel("Revolutions")
+    
+    # Add an alternating white/light grey background for each revolution
+    for i in range(len(intervals)):
+        if i % 2 == 0:
+            ax.axvspan(i - 0.5, i + 0.5, facecolor='gainsboro', alpha=0.5)
 
     ax.grid(True, which="major", axis="both", ls="-", color="gainsboro")
     ax.grid(True, which="minor", axis="both", ls="-", color="gainsboro")
-
     if title:
-        ax.set_title(title + "\n" , fontsize=16)
+        ax.set_title(title + "\n", fontsize=16)
+    plt.savefig(output_file_path)
     
-    plt.show()
+    # Show the plot if DISPLAY is set or if a non-headless backend is in use
+    if os.environ.get('DISPLAY') or 'agg' not in plt.get_backend().lower():
+        plt.show()
 
 def main():
     args = parse_arguments()
@@ -114,9 +117,11 @@ def main():
         print(f"Expected {args.num_peaks} peaks, but found {len(peak_times)}. Unable to calculate statistics.")
 
     if args.plot_data == 'yes':
-        plot_out(intervals, args.plot_title)
-
+        output_dir = os.path.dirname(args.filename)
+        output_file_name = os.path.splitext(os.path.basename(args.filename))[0] + "_RPM_Analysis_Plot.png"
+        output_file_path = os.path.join(output_dir, output_file_name)
+        plot_out(intervals, args.plot_title, output_file_path)
+        print(f"Plot saved to {output_file_path}")
 
 if __name__ == "__main__":
     main()
-    

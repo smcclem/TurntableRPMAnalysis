@@ -8,28 +8,29 @@ This Python script provides an accurate way to analyze the revolutions per minut
 - **Peak Detection**: Automatically detects the highest peaks in the audio signal to determine the time intervals between successive revolutions.
 - **RPM Calculation**: Calculates the RPM based on the time intervals between peaks.
 - **Statistical Analysis**: Provides minimum, maximum, average, and standard deviation for both time intervals and RPM values.
+- **Twin Axis RPM and Time Interval Visualization Plot**: Provides for enhanced comparative analysis of time intervals and RPM on a single graph.
 
 ## Requirements
 - Python 3
-- Librosa
 - NumPy
 - SciPy
+- Matplotlib
 
 ## Installation
 1. Ensure Python 3 is installed on your system.
 2. Install the required Python libraries using pip:
 
 ```bash
-pip install librosa numpy scipy
+pip install numpy scipy matplotlib
 ```
 
 ## Usage
 1. Directly record the output of your turntable with the stylus looping in a a dead-end groove (i.e. the end of the LP side) in stereo with a sound card (line input).
-2. Save the audio file in a format supported by Librosa (e.g., WAV).
+2. Save the audio file in WAV format.
 3. Run the script from the command line, providing the path to your audio file, the number of clicks (peaks) included in your audio file, the minimum expected distance between clicks in milliseconds, and optionally the channel mode (`left`, `right`, or `mix`). Here's how you can do it:
 
 ```bash
-python3 rpm.py <path_to_your_audio_file.wav> <number_of_peaks> <minimum_distance_in_ms> [--channel_mode <channel_mode>]
+python3 rpm.py [-h] [--channel_mode {left,right,mix}] [--plot] [--plot_title PLOT_TITLE] filename num_peaks min_distance_ms
 ```
 
 Example Command:
@@ -59,7 +60,7 @@ The other variable is 'channel_mode' which can select the left, right or stereo 
 that doesn't work, 'mix' can be used. Mix mixes the two channels into mono (in phase). This aggregation might be needed to get analysis working, but it might be slightly less accurate than using a single channel. In the event that none of these methods work,
 it means that your equipment or test LP isn't providing a clean enough peak for the script to detect precise timing.
 
-While not required, we recommend normalizing the WAV file to 0 dB and removing DC offset, using software such as Audacity. Normalizing in Audacity has the benefit in that you can clearly visualize the clicks and the noise floor within Audacity to make sure you have captured
+While not required, we recommend normalizing the WAV file to 0 dB, using software such as Audacity. Normalizing in Audacity has the benefit in that you can clearly visualize the clicks and the noise floor within Audacity to make sure you have captured
 something usable. We recommend saving the file with a name which indicates the number of clicks included, so that you do not have to remember or count them when you run the script, remembering that you must specify the number of peaks value to the script as an argument.
 You should also include the speed you used (33 or 45) as well, since the minimum expected distance must be specified according to the usage.
 
@@ -94,6 +95,20 @@ Max                  1.333380208333331041                45.004219145544958280
 Average              1.333293678977272911                45.001338466409144701
 Std Dev              0.000060313472201144                0.002035699504200471
 ```
+
+There is another option where you can run the script with the --plot option to get a twin-axis plot visualizing both time intervals between peaks and their corresponding RPM (Revolutions Per Minute) on a single graph. This twin-axis plot provides a comprehensive view of the audio analysis, allowing users to easily compare the time intervals and RPMs, which can be particularly useful for understanding variations in the turntable's speed. To utilize this feature, simply add --plot when running the script, as shown below:
+
+```bash
+python3 rpm.py python your_script_name.py your_audio_file.wav number_of_peaks minimum_distance_ms  <b>--plot --plot_title "Your Custom Plot Title"</b>
+```
+This will generate a twin-axis plot, where one axis represents the time intervals between successive peaks (in seconds), and the other axis shows the calculated RPM values. The plot is saved as a PNG file in the same directory as the input audio file, named with the prefix of the audio file followed by "_RPM_Analysis_Plot.png". Additionally, if your environment supports displaying plots, the plot will also be shown interactively. Remember, the --plot option is entirely optional and should be used when visual insights into the RPM analysis are desired. It's an excellent tool for visually diagnosing the performance and consistency of your turntable or any other rotating machinery analyzed through audio signals.
+
+<br/>
+<div align="center" style="padding: 20px 0;">
+    <img src="images/fivem2_RPM_Analysis_Plot.png" alt="Generated twin-axis plot">
+    <p><b>Generated twin-axis plot.</b></p>
+</div>
+<br/>
  
 ## Community and Support
 

@@ -99,7 +99,7 @@ Std Dev              0.000060313472201144                0.002035699504200471
 There is another option where you can run the script with the --plot option to get a twin-axis plot visualizing both time intervals between peaks and their corresponding RPM (Revolutions Per Minute) on a single graph. This twin-axis plot provides a comprehensive view of the audio analysis, allowing users to easily compare the time intervals and RPMs, which can be particularly useful for understanding variations in the turntable's speed. To utilize this feature, simply add --plot when running the script, as shown below:
 
 ```bash
-python3 rpm.py python your_script_name.py your_audio_file.wav number_of_peaks minimum_distance_ms  <b>--plot --plot_title "Your Custom Plot Title"</b>
+python3 rpm.py python your_script_name.py your_audio_file.wav number_of_peaks minimum_distance_ms  --plot --plot_title "Your Custom Plot Title"
 ```
 This will generate a twin-axis plot, where one axis represents the time intervals between successive peaks (in seconds), and the other axis shows the calculated RPM values. The plot is saved as a PNG file in the same directory as the input audio file, named with the prefix of the audio file followed by "_RPM_Analysis_Plot.png". Additionally, if your environment supports displaying plots, the plot will also be shown interactively. Remember, the --plot option is entirely optional and should be used when visual insights into the RPM analysis are desired. It's an excellent tool for visually diagnosing the performance and consistency of your turntable or any other rotating machinery analyzed through audio signals.
 

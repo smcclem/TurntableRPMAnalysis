@@ -67,10 +67,10 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Turntable RPM Analysis")
     parser.add_argument("filename", type=str, help="Path to the audio file")
     parser.add_argument("num_peaks", type=int, help="Number of highest peaks to find")
-    parser.add_argument("min_distance_ms", type=int, help="Minimum distance between peaks in milliseconds. Ex. 33 1/3 RPM: 1700, For 45 RPM: 1300")
-    parser.add_argument("--channel_mode", type=str, choices=['left', 'right', 'mix'], default='mix', help="Channel mode for analysis ('left', 'right', 'mix')")
-    parser.add_argument("--plot_data", type=str, choices=['yes', 'no'], default='no', help="Plot the RPM data per revolution ('yes', 'no')")
-    parser.add_argument("--plot_title", action='store', type=str, help="Title of the plot")
+    parser.add_argument("min_distance_ms", type=int, help="Minimum distance between peaks in milliseconds")
+    parser.add_argument("--channel_mode", type=str, choices=['left', 'right', 'mix'], default='mix', help="Channel mode for analysis")
+    parser.add_argument("--plot", action="store_true", help="Plot the RPM data per revolution")
+    parser.add_argument("--plot_title", type=str, default="RPM Analysis Plot", help="Title of the plot")
     return parser.parse_args()
 
 def plot_out(intervals, title, output_file_path):
@@ -116,7 +116,7 @@ def main():
     else:
         print(f"Expected {args.num_peaks} peaks, but found {len(peak_times)}. Unable to calculate statistics.")
 
-    if args.plot_data == 'yes':
+    if args.plot:
         output_dir = os.path.dirname(args.filename)
         output_file_name = os.path.splitext(os.path.basename(args.filename))[0] + "_RPM_Analysis_Plot.png"
         output_file_path = os.path.join(output_dir, output_file_name)
